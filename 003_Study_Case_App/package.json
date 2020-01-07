@@ -1,0 +1,23 @@
+{
+  "name": "maps-app",
+  "version": "1.0.0",
+  "description": "Study case application for TS learning purposes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./public/index.html",
+    "build": "parcel build ./public/js",
+    "watch:js": "parcel watch ./src/index.ts --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel build ./src/index.ts --out-dir ./public/js --out-file bundle.js"
+  },
+  "author": "Artem Nikolaiev",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/faker": "^4.1.8",
+    "@types/googlemaps": "^3.39.0",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "faker": "^4.1.0"
+  }
+}
