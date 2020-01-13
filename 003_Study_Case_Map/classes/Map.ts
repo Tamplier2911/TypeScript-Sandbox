@@ -1,6 +1,8 @@
 // element selectors
 // const mapDiv = document.getElementById("map");
 
+const google = globalThis.google;
+
 export interface DisplayMap {
   name: string;
   location: {
@@ -11,7 +13,8 @@ export interface DisplayMap {
 }
 
 export class CustomMap {
-  private map: google.maps.Map;
+  private map: object;
+  // private map: google.maps.Map;
 
   constructor(mapDiv: Element) {
     this.map = new google.maps.Map(mapDiv, {

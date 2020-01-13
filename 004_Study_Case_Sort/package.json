@@ -1,0 +1,19 @@
+{
+  "name": "004_study_case_sort",
+  "version": "1.0.0",
+  "description": "Study case for TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently --kill-others-on-fail \"npm run build:watch\" \"npm run start:watch\"",
+    "start:watch": "nodemon ./build/index.js",
+    "build": "tsc",
+    "build:watch": "tsc -w"
+  },
+  "author": "Artem Nikolaiev",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.0.2",
+    "nodemon": "^2.0.2"
+  }
+}

@@ -85188,10 +85188,12 @@ exports.Company = Company;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var google = globalThis.google;
 
 var CustomMap =
 /** @class */
 function () {
+  // private map: google.maps.Map;
   function CustomMap(mapDiv) {
     this.map = new google.maps.Map(mapDiv, {
       scrollwheel: false,
@@ -85301,7 +85303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56457" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52373" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
