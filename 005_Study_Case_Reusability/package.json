@@ -1,0 +1,20 @@
+{
+  "name": "005_study_case_reusability",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently --kill-others-on-fail \"npm run build:watch\" \"npm run start:watch\"",
+    "start:watch": "nodemon ./build/index.js",
+    "build": "tsc",
+    "build:watch": "tsc -w"
+  },
+  "author": "Artem Nikolaiev",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^13.5.0",
+    "concurrently": "^5.0.2",
+    "nodemon": "^2.0.2"
+  }
+}
