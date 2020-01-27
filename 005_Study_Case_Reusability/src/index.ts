@@ -10,8 +10,6 @@ let reader = new CSVFileReader("..", "football.csv");
 // save result of read file in entries array
 const entriesArray = reader.read();
 
-//
-
 // perform data transformation with util function
 const finalData = convertToArrayOfObjects(entriesArray);
 console.log(finalData);

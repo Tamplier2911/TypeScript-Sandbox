@@ -1,9 +1,6 @@
 // fily system node module
 const fs = require("fs");
 
-// Utils
-import { dateStringToDate, stringToNumber } from "./utils";
-
 export class CSVFileReader {
   data: string[][] = [];
   fileName: string;
