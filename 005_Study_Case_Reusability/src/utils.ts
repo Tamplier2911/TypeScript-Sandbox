@@ -14,7 +14,7 @@ export const stringToNumber = (data: string): number => {
   return parseInt(data);
 };
 
-interface DataObject {
+export interface DataObject {
   date: Date;
   homeTeam: string;
   awayTeam: string;
