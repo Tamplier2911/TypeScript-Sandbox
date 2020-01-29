@@ -8,3 +8,4 @@ Including this file in order to keep references.
 3. 003 - Google Map with TypeScript. (classes, interfaces, best practices)
 4. 004 - Sorting different data structures with TypeScript.
 5. 005 - Code reusability in TS.
+6. 006 - Framework Architecture with TS.
