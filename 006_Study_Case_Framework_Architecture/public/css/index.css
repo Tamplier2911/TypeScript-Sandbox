@@ -1,0 +1,125 @@
+/* 100 / 16 * 10 */
+
+:root {
+  /* // TYPOGRAPHY */
+  --font-reg: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  /* // COLOR PALET */
+  --black: #000;
+  --white: #fff;
+  --cl-font: #333;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: var(--font-reg);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--cl-font);
+}
+
+#root {
+  /* max-width: 1170px;
+  min-height: 100vh;
+  background-color: #777;
+  margin: 0 auto; */
+  display: grid;
+  grid-template-rows: 8rem 1fr 8rem;
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [center-start] repeat(
+      10,
+      [col-start] minmax(min-content, 11.7rem) [col-end]
+    )
+    [center-end]
+    minmax(1rem, 1fr) [full-end];
+}
+
+.header {
+  display: grid;
+  /* grid-template-columns: subgrid; */
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [center-start] repeat(
+      10,
+      [col-start] minmax(min-content, 11.7rem) [col-end]
+    )
+    [center-end]
+    minmax(1rem, 1fr) [full-end];
+  grid-area: 1 / full-start / 2 / full-end;
+  background-color: slateblue;
+  align-items: center;
+  justify-items: center;
+
+  box-shadow: 0 0.2rem 0.8rem #0000009d;
+}
+
+.header div {
+  /* max-width: 1170px; */
+  /* margin: 0 auto;  */
+  grid-column: center-start / center-end;
+  grid-column: 2 / 12;
+  color: #e4e4e4;
+}
+
+.main {
+  grid-area: 2 / center-start / 3 / center-end;
+  min-height: calc(100vh - 16rem);
+}
+
+.footer {
+  display: grid;
+  /* grid-template-columns: subgrid; */
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [center-start] repeat(
+      10,
+      [col-start] minmax(min-content, 11.7rem) [col-end]
+    )
+    [center-end]
+    minmax(1rem, 1fr) [full-end];
+  grid-area: 1 / full-start / 2 / full-end;
+  grid-area: 3 / full-start / 4 / full-end;
+  background-color: slateblue;
+  align-items: center;
+  justify-items: center;
+
+  box-shadow: 0 -0.2rem 0.6rem #0000009d;
+}
+
+.footer div {
+  /* max-width: 1170px; */
+  /* margin: 0 auto; */
+  grid-column: center-start / center-end;
+  grid-column: 2 / 12;
+  color: #e4e4e4;
+}
+
+/* clearfix */
+/*
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.element {
+  @include clearfix;
+}
+*/
