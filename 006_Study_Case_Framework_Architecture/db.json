@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "name": "Ryan Dahl",
+      "age": 32,
+      "id": 1,
+      "photo": "https://bit.ly/2uT35Lo"
+    },
+    {
+      "name": "Yuki Mizuri",
+      "age": 32,
+      "id": 2,
+      "photo": "https://bit.ly/3aWjOOB"
+    }
+  ]
+}
