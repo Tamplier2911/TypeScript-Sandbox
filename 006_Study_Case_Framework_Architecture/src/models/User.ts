@@ -1,23 +1,17 @@
-import axios, { AxiosResponse } from "axios";
-
-interface dataObject {
-  name?: string;
-  age?: number;
-  photo?: string;
-  id?: number;
-}
-
-interface eventObject {
-  [key: string]: Callback[];
-}
+// import axios, { AxiosResponse } from "axios";
+import { DataObject } from "./typesAndInterfaces";
+import { EventDeligation } from "./EventDeligation";
+import { Fetch } from "./Fetch";
+import { AxiosResponse } from "axios";
 
 type Callback = () => void;
 
 export class User {
-  private data: dataObject;
-  private events: eventObject = {};
+  private data: DataObject;
+  private events = new EventDeligation();
+  private sync = new Fetch<DataObject>("http://localhost:3000/users");
 
-  constructor(userObject: dataObject) {
+  constructor(userObject: DataObject) {
     this.data = userObject;
   }
 
@@ -25,21 +19,28 @@ export class User {
     return this.data[propName];
   }
 
-  set(userObject: dataObject): void {
+  set(userObject: DataObject): void {
     this.data = Object.assign({}, this.data, userObject);
   }
 
   on(eventName: string, cb: Callback): void {
-    this.events[eventName]
-      ? this.events[eventName].push(cb)
-      : (this.events[eventName] = [cb]);
+    this.events.on(eventName, cb);
   }
 
   trigger(eventName: string): void {
-    if (!this.events[eventName] || !this.events[eventName].length) return;
-    this.events[eventName].forEach(cb => cb());
+    this.events.trigger(eventName);
   }
 
+  /* CHECK
+  async fetch(): Promise<AxiosResponse> {
+    const fetchResponse: AxiosResponse = await this.sync.fetch(this.data.id);
+    console.log(fetchResponse.data, "from user");
+    this.set(fetchResponse);
+    return fetchResponse;
+  }
+  */
+
+  /*
   async fetch(): Promise<AxiosResponse> {
     try {
       const res: AxiosResponse = await axios({
@@ -61,7 +62,7 @@ export class User {
         url: "http://localhost:3000/users"
       });
       const dataArr = res.data;
-      if (dataArr.find((obj: dataObject) => obj.id === this.get("id"))) {
+      if (dataArr.find((obj: DataObject) => obj.id === this.get("id"))) {
         const res: AxiosResponse = await axios({
           method: "PATCH",
           url: `http://localhost:3000/users/${this.get("id")}`,
@@ -82,6 +83,7 @@ export class User {
       console.log(error.message);
     }
   }
+  */
 }
 
 // Composition Options

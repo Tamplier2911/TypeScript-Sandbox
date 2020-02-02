@@ -1,11 +1,7 @@
-type Callback = () => void;
-
-interface eventObject {
-  [key: string]: Callback[];
-}
+import { EventObject, Callback } from "./typesAndInterfaces";
 
 export class EventDeligation {
-  events: eventObject;
+  events: EventObject = {};
 
   on(eventName: string, cb: Callback): void {
     this.events[eventName]

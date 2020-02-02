@@ -15,14 +15,16 @@ console.log(user.get("age"));
 
 user.on("click", () => console.log("Clicked!"));
 user.on("click", () => console.log("Double Clicked!"));
+user.on("scroll", () => console.log("Scroll captured!"));
 
 user.trigger("click");
+user.trigger("scroll");
 user.trigger("change");
 
 console.log(user);
 
-user.save();
-user.fetch();
+// user.save();
+// user.fetch();
 
 setTimeout(() => {
   console.log(user);
