@@ -1,35 +1,67 @@
 // import axios, { AxiosResponse } from "axios";
 import { DataObject } from "./typesAndInterfaces";
-import { EventDeligation } from "./EventDeligation";
+import { Eventing } from "./Eventing";
 import { Fetch } from "./Fetch";
+import { Attributes } from "./Attributes";
 import { AxiosResponse } from "axios";
 
-type Callback = () => void;
+// type Callback = () => void;
 
 export class User {
-  private data: DataObject;
-  private events = new EventDeligation();
-  private sync = new Fetch<DataObject>("http://localhost:3000/users");
+  // private data: DataObject;
+  public attributes: Attributes<DataObject> = new Attributes<DataObject>({});
+  public events = new Eventing();
+  public sync = new Fetch<DataObject>("http://localhost:3000/users");
 
   constructor(userObject: DataObject) {
-    this.data = userObject;
+    this.attributes.set(userObject);
   }
 
-  get(propName: string): string | number {
-    return this.data[propName];
+  // with getter
+  get get() {
+    return this.attributes.get;
   }
+
+  // without getter
+  /*
+  get(propName: string): string | number {
+    return this.attributes.data[propName];
+  }
+  */
 
   set(userObject: DataObject): void {
-    this.data = Object.assign({}, this.data, userObject);
+    this.attributes.data = Object.assign({}, this.attributes.data, userObject);
   }
 
+  /*
+  set(userObject: DataObject): void {
+    this.attributes.data = Object.assign({}, this.attributes.data, userObject);
+  }
+  */
+
+  // with getter
+  get on() {
+    return this.events.on;
+  }
+
+  // with getter
+  get trigger() {
+    return this.events.trigger;
+  }
+
+  // without getter
+  /*
   on(eventName: string, cb: Callback): void {
     this.events.on(eventName, cb);
   }
+  */
 
+  // without getter
+  /*
   trigger(eventName: string): void {
     this.events.trigger(eventName);
   }
+  */
 
   /* CHECK
   async fetch(): Promise<AxiosResponse> {
