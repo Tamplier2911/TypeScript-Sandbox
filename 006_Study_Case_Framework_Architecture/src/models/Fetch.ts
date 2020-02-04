@@ -8,7 +8,6 @@ export class Fetch<T extends HasId> {
     this.rootUrl = rootUrl;
   }
 
-  /*
   async fetch(id: number): Promise<AxiosResponse> {
     try {
       const res: AxiosResponse = await axios({
@@ -22,13 +21,7 @@ export class Fetch<T extends HasId> {
       console.log(error.message);
     }
   }
-  */
 
-  fetch(id: number): AxiosPromise {
-    return axios.get(`${this.rootUrl}/${id}`);
-  }
-
-  /*
   async save(dataObject: T): Promise<AxiosResponse> {
     const { id } = dataObject;
     try {
@@ -37,6 +30,7 @@ export class Fetch<T extends HasId> {
         url: `${this.rootUrl}`
       });
       const dataArr: T[] = res.data;
+      console.log(dataArr, "GET");
       if (dataArr.find(obj => obj.id === id)) {
         const res: AxiosResponse = await axios({
           method: "PATCH",
@@ -56,15 +50,6 @@ export class Fetch<T extends HasId> {
       }
     } catch (error) {
       console.log(error.message);
-    }
-  }
-  */
-  save(dataObject: T): AxiosPromise {
-    const { id } = dataObject;
-    if (id) {
-      return axios.patch(`${this.rootUrl}/${id}`);
-    } else {
-      return axios.post(`${this.rootUrl}`, dataObject);
     }
   }
 }

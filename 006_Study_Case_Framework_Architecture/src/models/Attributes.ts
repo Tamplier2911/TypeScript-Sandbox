@@ -2,19 +2,19 @@ import { DataObject } from "./typesAndInterfaces";
 
 export class Attributes<T> {
   public data: T;
-  public attributes;
+  // public attrbutes;
 
   constructor(dataObject: T) {
     this.data = dataObject;
   }
 
-  get<K extends keyof T>(key: K): T[K] {
-    // with getter
-    // console.log(this.attributes.data, "here");
-    return this.attributes.data[key];
+  // with getter as arrow - lexical this
+  get = <K extends keyof T>(key: K): T[K] => {
+    return this.data[key];
+  };
 
-    // without getter
-    // return this.data[key];
+  getAll(): T {
+    return this.data;
   }
 
   set(dataObject: T): void {

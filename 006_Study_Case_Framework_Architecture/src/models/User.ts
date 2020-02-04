@@ -5,10 +5,13 @@ import { Fetch } from "./Fetch";
 import { Attributes } from "./Attributes";
 import { AxiosResponse } from "axios";
 
+import { Model } from "./Model";
+
 // type Callback = () => void;
 
-export class User {
+export class User extends Model<DataObject> {
   // private data: DataObject;
+  /*
   public attributes: Attributes<DataObject> = new Attributes<DataObject>({});
   public events = new Eventing();
   public sync = new Fetch<DataObject>("http://localhost:3000/users");
@@ -17,103 +20,37 @@ export class User {
     this.attributes.set(userObject);
   }
 
-  // with getter
   get get() {
     return this.attributes.get;
   }
 
-  // without getter
-  /*
-  get(propName: string): string | number {
-    return this.attributes.data[propName];
-  }
-  */
-
-  set(userObject: DataObject): void {
-    this.attributes.data = Object.assign({}, this.attributes.data, userObject);
+  set(dataObject: DataObject): void {
+    this.attributes.set(dataObject);
+    this.events.trigger("change");
   }
 
-  /*
-  set(userObject: DataObject): void {
-    this.attributes.data = Object.assign({}, this.attributes.data, userObject);
-  }
-  */
-
-  // with getter
   get on() {
     return this.events.on;
   }
 
-  // with getter
   get trigger() {
     return this.events.trigger;
   }
 
-  // without getter
-  /*
-  on(eventName: string, cb: Callback): void {
-    this.events.on(eventName, cb);
-  }
-  */
-
-  // without getter
-  /*
-  trigger(eventName: string): void {
-    this.events.trigger(eventName);
-  }
-  */
-
-  /* CHECK
-  async fetch(): Promise<AxiosResponse> {
-    const fetchResponse: AxiosResponse = await this.sync.fetch(this.data.id);
-    console.log(fetchResponse.data, "from user");
-    this.set(fetchResponse);
-    return fetchResponse;
-  }
-  */
-
-  /*
-  async fetch(): Promise<AxiosResponse> {
-    try {
-      const res: AxiosResponse = await axios({
-        method: "GET",
-        url: `http://localhost:3000/users/${this.get("id")}`
-      });
-      console.log(res.data, "GET");
-      this.set(res.data);
-      return res;
-    } catch (error) {
-      console.log(error.message);
-    }
+  fetch(): void {
+    const id = this.attributes.get("id");
+    if (typeof id !== "number") return;
+    this.sync
+      .fetch(id)
+      .then((res: AxiosResponse): void => this.set(res.data))
+      .catch(err => console.log(err.message));
   }
 
-  async save(): Promise<AxiosResponse> {
-    try {
-      const res: AxiosResponse = await axios({
-        method: "GET",
-        url: "http://localhost:3000/users"
-      });
-      const dataArr = res.data;
-      if (dataArr.find((obj: DataObject) => obj.id === this.get("id"))) {
-        const res: AxiosResponse = await axios({
-          method: "PATCH",
-          url: `http://localhost:3000/users/${this.get("id")}`,
-          data: this.data
-        });
-        console.log(res.data, "PATCH");
-        return res;
-      } else {
-        const res: AxiosResponse = await axios({
-          method: "POST",
-          url: `http://localhost:3000/users`,
-          data: this.data
-        });
-        console.log(res.data, "POST");
-        return res;
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+  save(): void {
+    this.sync
+      .save(this.attributes.getAll())
+      .then((res: AxiosResponse): void => this.events.trigger("save"))
+      .catch(err => console.log(err.message));
   }
   */
 }
