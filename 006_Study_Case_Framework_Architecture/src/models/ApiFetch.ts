@@ -1,8 +1,8 @@
-import axios, { AxiosResponse, AxiosPromise } from "axios";
-import { DataObject, HasId } from "./typesAndInterfaces";
+import axios, { AxiosResponse } from "axios";
+import { HasId } from "./typesAndInterfaces";
 
-export class Fetch<T extends HasId> {
-  private rootUrl: string;
+export class ApiFetch<T extends HasId> {
+  public rootUrl: string;
 
   constructor(rootUrl: string) {
     this.rootUrl = rootUrl;

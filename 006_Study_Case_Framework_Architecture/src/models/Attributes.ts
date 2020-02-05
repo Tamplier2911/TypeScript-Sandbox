@@ -1,5 +1,3 @@
-import { DataObject } from "./typesAndInterfaces";
-
 export class Attributes<T> {
   public data: T;
   // public attrbutes;

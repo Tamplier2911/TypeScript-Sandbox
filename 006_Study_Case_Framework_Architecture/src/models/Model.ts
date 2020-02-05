@@ -30,6 +30,7 @@ export class Model<T extends HasId> {
 
   fetch(): void {
     const id = this.attributes.get("id");
+    // pre define id if id is not defined
     if (typeof id !== "number") return;
     this.sync
       .fetch(id)

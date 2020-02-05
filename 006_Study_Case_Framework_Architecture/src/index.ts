@@ -1,6 +1,8 @@
 import { User } from "./models/User";
+import { Collection } from "./models/Collection";
+import { DataObject } from "./models/typesAndInterfaces";
 
-const user = new User({
+const user = User.buildUser({
   name: "Jordan Walke",
   age: 32,
   id: 0,
@@ -27,11 +29,25 @@ user.trigger("scroll");
 // user.trigger("change");
 
 user.fetch();
+
 user.on("save", () => console.log("Current Object was Saved!"));
-user.save();
+
+setTimeout(() => {
+  user.save();
+}, 2000);
 
 setTimeout(() => {
   console.log(user);
 }, 2000);
 
 console.log("Parcel Bundler");
+
+const collection = new Collection<User, DataObject>(
+  "http://localhost:3000/users",
+  User.buildUser
+);
+console.log(collection);
+collection.fetch();
+setTimeout(() => {
+  console.log(collection);
+}, 3000);
