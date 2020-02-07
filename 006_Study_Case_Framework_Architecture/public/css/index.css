@@ -79,6 +79,10 @@ body {
 .main {
   grid-area: 2 / center-start / 3 / center-end;
   min-height: calc(100vh - 16rem);
+  display: grid;
+  grid-template-rows: min-content;
+  justify-content: center;
+  align-content: center;
 }
 
 .footer {
@@ -123,3 +127,47 @@ body {
   @include clearfix;
 }
 */
+
+.userForm__container {
+  display: grid;
+  /* justify-items: center; */
+  grid-row-gap: 10px;
+  width: 40vw;
+}
+
+.userForm__header {
+  font-size: 30px;
+  font-weight: 300;
+  justify-self: center;
+}
+
+.userForm__input {
+  outline: none;
+  padding: 5px 2px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  color: #333;
+  font-size: 16px;
+}
+
+.userForm__input:focus {
+  border: 1px solid slateblue;
+}
+
+.userForm__button {
+  cursor: pointer;
+  outline: none;
+  padding: 5px 2px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #333;
+  color: #333;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: border 0.3s, color 0.3s;
+}
+
+.userForm__button:hover {
+  color: slateblue;
+  border: 1px solid slateblue;
+}

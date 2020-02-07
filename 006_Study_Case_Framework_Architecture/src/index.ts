@@ -1,6 +1,5 @@
 import { User } from "./models/User";
-import { Collection } from "./models/Collection";
-import { DataObject } from "./models/typesAndInterfaces";
+import { UserForm } from "./views/UserForm";
 
 const user = User.buildUser({
   name: "Jordan Walke",
@@ -40,14 +39,15 @@ setTimeout(() => {
   console.log(user);
 }, 2000);
 
-console.log("Parcel Bundler");
-
-const collection = new Collection<User, DataObject>(
-  "http://localhost:3000/users",
-  User.buildUser
-);
-console.log(collection);
+const collection = User.buildUserCollection();
 collection.fetch();
+
 setTimeout(() => {
   console.log(collection);
 }, 3000);
+
+const main = document.querySelector(".main");
+console.log(main, "PHEW");
+
+const form = new UserForm(main);
+form.render();
