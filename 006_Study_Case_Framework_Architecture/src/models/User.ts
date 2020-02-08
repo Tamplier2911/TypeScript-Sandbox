@@ -21,4 +21,8 @@ export class User extends Model<DataObject> {
       (json: DataObject) => User.buildUser(json)
     );
   }
+
+  setRandomAge(): void {
+    this.set({ age: Math.floor(Math.random() * 32 + 18) });
+  }
 }

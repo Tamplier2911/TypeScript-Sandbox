@@ -49,5 +49,5 @@ setTimeout(() => {
 const main = document.querySelector(".main");
 console.log(main, "PHEW");
 
-const form = new UserForm(main);
-form.render();
+const form = new UserForm(main, user);
+// form.render();
