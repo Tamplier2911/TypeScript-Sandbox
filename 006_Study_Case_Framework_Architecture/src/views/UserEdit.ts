@@ -1,0 +1,41 @@
+import { View } from "./View";
+import { User } from "../models/User";
+import { DataObject } from "../models/typesAndInterfaces";
+import { UserForm } from "./UserForm";
+import { UserShow } from "./UserShow";
+
+export class UserEdit extends View<User, DataObject> {
+  eventsMap(): { [key: string]: () => void } {
+    return {
+      // add events here e.g:
+      //   "click:#btn-save": this.onSaveClick
+    };
+  }
+
+  onSaveClick = (): void => {
+    // define events here e.g:
+    // this.model.save();
+  };
+
+  regionsMap(): { [key: string]: string } {
+    return {
+      userShow: ".user-show",
+      userForm: ".user-form"
+    };
+  }
+
+  onRender(): void {
+    // nesting implementation
+    new UserShow(this.regions.userShow, this.model).render();
+    new UserForm(this.regions.userForm, this.model).render();
+  }
+
+  template(): string {
+    return `
+            <div class="user-data">
+                <div class="user-show"></div>
+                <div class="user-form"></div>
+            </div>
+        `;
+  }
+}

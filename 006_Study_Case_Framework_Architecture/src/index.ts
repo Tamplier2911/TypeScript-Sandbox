@@ -1,5 +1,5 @@
 import { User } from "./models/User";
-import { UserForm } from "./views/UserForm";
+import { UserEdit } from "./views/UserEdit";
 
 const user = User.buildUser({
   name: "Jordan Walke",
@@ -8,6 +8,12 @@ const user = User.buildUser({
   photo: "https://bit.ly/2Og7zCQ"
 });
 
+const main = document.querySelector(".main");
+const userEdit = new UserEdit(main, user);
+userEdit.render();
+console.log(userEdit, "OBJ");
+
+/*
 console.log(user.get("name"));
 console.log(user.get("age"));
 
@@ -46,8 +52,4 @@ setTimeout(() => {
   console.log(collection);
 }, 3000);
 
-const main = document.querySelector(".main");
-console.log(main, "PHEW");
-
-const form = new UserForm(main, user);
-// form.render();
+*/

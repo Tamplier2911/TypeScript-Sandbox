@@ -17,6 +17,10 @@ export interface DataObject {
   id?: number;
 }
 
+export interface ViewModel {
+  on(eventName: string, cb: () => void): void;
+}
+
 export interface Attributes<T> {
   // data: T;
   get<K extends keyof T>(key: K): T[K];

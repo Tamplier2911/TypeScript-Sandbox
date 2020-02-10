@@ -171,3 +171,51 @@ body {
   color: slateblue;
   border: 1px solid slateblue;
 }
+
+.userInfo__container {
+  display: grid;
+  /* justify-items: center; */
+  grid-row-gap: 10px;
+  width: 40vw;
+
+  grid-template-columns: 1fr min-content;
+}
+
+.userInfo__header {
+  grid-column: 1/-1;
+  font-size: 30px;
+  font-weight: 300;
+  justify-self: center;
+}
+
+.userInfo__data {
+  font-size: 20px;
+  align-self: center;
+}
+
+.userInfo__photoContainer {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* border: 2px solid slateblue; */
+  box-shadow: 2px 2px 8px #000;
+}
+
+.userInfo__photo {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.user-show {
+}
+
+.user-form {
+}
+
+.user-data {
+  display: grid;
+  grid-row-gap: 4rem;
+}

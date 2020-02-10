@@ -1,20 +1,13 @@
 import { User } from "../models/User";
+import { DataObject } from "../models/typesAndInterfaces";
+import { View } from "./View";
 
-export class UserForm {
-  constructor(public parent: Element, public model: User) {
-    this.bindModel();
-  }
-
-  bindModel(): void {
-    this.model.on("change", () => {
-      this.render();
-    });
-  }
-
+export class UserForm extends View<User, DataObject> {
   eventsMap(): { [key: string]: () => void } {
     return {
       "click:#btn-name": this.onChangeNameClick,
-      "click:#btn-age": this.onRandomizeAgeClick
+      "click:#btn-age": this.onRandomizeAgeClick,
+      "click:#btn-save": this.onSaveClick
     };
   }
 
@@ -23,6 +16,8 @@ export class UserForm {
     const input = this.parent.querySelector("#input-name") as HTMLInputElement;
     const name = input.value;
     this.model.set({ name: name });
+    console.log(name);
+    console.log(this.model);
   };
 
   // USE ARROW FUNCTION FOR LEXICAL THIS, TO REFER TO ORIGINAL CONTEXT
@@ -31,39 +26,23 @@ export class UserForm {
     this.model.setRandomAge();
   };
 
+  onSaveClick = (): void => {
+    this.model.save();
+  };
+
   template(): string {
+    // <h1 class="userForm__header">User Form</h1>
+    // <div>${this.model.get("name")}, ${this.model.get("age")}</div>
     return `
             <div class="userForm__container">
-                <h1 class="userForm__header">User Form</h1>
-                <div>${this.model.get("name")}, ${this.model.get("age")}</div>
+                ${/* extracted */ ""}
                 <input type="text" class="userForm__input" placeholder="${this.model.get(
                   "name"
                 )}" id="input-name" />
                 <button type="button" class="userForm__button" id="btn-name">Change Name</button>
                 <button type="button" class="userForm__button" id="btn-age">Randomize Age</button>
+                <button type="button" class="userForm__button" id="btn-save">Save Data</button>
             </div>
         `;
-  }
-
-  bindEvents(fragment: DocumentFragment): void {
-    const eventsMap = this.eventsMap();
-
-    Object.keys(eventsMap).forEach(key => {
-      // [click, button]
-      const [eventName, selector] = key.split(":");
-      fragment.querySelectorAll(selector).forEach(el => {
-        el.addEventListener(eventName, eventsMap[key]);
-      });
-    });
-  }
-
-  render(): void {
-    this.parent.innerHTML = "";
-
-    const templateElement = document.createElement("template");
-    templateElement.innerHTML = this.template();
-    this.bindEvents(templateElement.content);
-    // this.parent.appendChild(templateElement.content);
-    this.parent.append(templateElement.content);
   }
 }
