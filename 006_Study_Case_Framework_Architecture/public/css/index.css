@@ -83,6 +83,14 @@ body {
   grid-template-rows: min-content;
   justify-content: center;
   align-content: center;
+
+  grid-row-gap: 2rem;
+  padding: 2rem;
+}
+
+.main > div {
+  border: 1px solid slateblue;
+  padding: 2rem;
 }
 
 .footer {
@@ -209,11 +217,11 @@ body {
   object-fit: cover;
 }
 
-.user-show {
+/* .user-show {
 }
 
 .user-form {
-}
+} */
 
 .user-data {
   display: grid;

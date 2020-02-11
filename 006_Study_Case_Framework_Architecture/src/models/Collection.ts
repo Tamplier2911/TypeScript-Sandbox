@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { Eventing } from "./Eventing";
-import { DataObject } from "./typesAndInterfaces";
 
 export class Collection<T, K> {
   //   models: DataObject[] = [];
@@ -27,6 +26,7 @@ export class Collection<T, K> {
           this.models.push(dataObject);
         })
       )
+      .then(() => console.log(this.events.trigger("change")))
       .catch(err => console.log(err.message));
   }
 }
