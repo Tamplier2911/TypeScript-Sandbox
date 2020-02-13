@@ -6,6 +6,9 @@ const router = express.Router();
 import {
   getLogin,
   postLogin,
+  getLogout,
+  requireAuth,
+  getProtected,
   getAllUsers,
   createNewUser,
   getOneUser,
@@ -17,6 +20,10 @@ router
   .route("/login")
   .get(getLogin)
   .post(postLogin);
+
+router.route("/logout").get(getLogout);
+
+router.route("/protected").get(requireAuth, getProtected);
 
 router
   .route("/")

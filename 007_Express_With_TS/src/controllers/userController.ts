@@ -1,6 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestWithBody } from "../types/interfaces";
 
+export const requireAuth = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.session && req.session.loggedIn === true) {
+    return next();
+  }
+  res.status(403);
+  res.send(`
+    <div style="max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh">
+      <div style="font-size: 25px">Not Permited</div>
+    </div>
+  `);
+};
+
 export const getLogin = (req: Request, res: Response, next: NextFunction) => {
   res.send(`
   <div style="max-width: 1070px; margin: 0 auto">
@@ -23,7 +39,7 @@ export const postLogin = (
   next: NextFunction
 ) => {
   const { name, email, password } = req.body;
-  //   console.log(req.session);
+
   if (
     name &&
     email &&
@@ -33,19 +49,31 @@ export const postLogin = (
     password === "123"
   ) {
     req.session.loggedIn = true;
-    res.redirect("/");
-    /*
-    res.send(`
-        <div style="max-width: 1070px; margin: 0 auto">
-            <div>Logged In successfuly!</div>
-            <div>Name: ${name}</div>    
-            <div>Email: ${email}</div>    
-            <div>Password: ${password}</div>    
-        </div>
-    `);
-    */
+    req.session.name = name;
+    req.session.email = email;
   }
-  next();
+  res.redirect("/");
+
+  // next();
+};
+
+export const getLogout = (req: Request, res: Response, next: NextFunction) => {
+  if (req.session) {
+    req.session = undefined;
+    res.redirect("/");
+  }
+};
+
+export const getProtected = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  res.send(`
+    <div style="max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh">
+      <div style="font-size: 25px">You shall pass!</div>
+    </div>
+  `);
 };
 
 export const getAllUsers = (

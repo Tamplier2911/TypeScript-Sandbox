@@ -50,9 +50,28 @@ app.use((req, res, next) => {
 
 // ROUTES
 app.get("/", (req, res, next) => {
-  res.send(`
-        <div>Hello, Node.js!</div>
+  const url = req.protocol + "://" + req.get("host") + req.originalUrl;
+
+  if (req.session && req.session.loggedIn === true) {
+    const { name, email } = req.session;
+    res.send(`
+        <div style="max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh">
+            <div style="font-size: 25px; margin-bottom: 10px">Logged In successfuly!</div>
+            <div style="font-size: 20px">Name: ${name}</div>    
+            <div style="font-size: 20px">Email: ${email}</div>
+            <a href="${url +
+              "users/logout"}" style="font-size: 20px; text-decoration: none; color: #333">Log Out</a>
+        </div>
     `);
+  } else {
+    res.send(`
+        <div style="max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh">
+            <div style="font-size: 25px">You have to log in to view this route!</div>
+            <a href="${url +
+              "users/login"}" style="font-size: 20px; text-decoration: none; color: #333">Log In</a>
+        </div>
+      `);
+  }
 });
 
 app.use("/users", userRouter);

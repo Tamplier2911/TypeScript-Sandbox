@@ -11,6 +11,8 @@ router
     .route("/login")
     .get(userController_1.getLogin)
     .post(userController_1.postLogin);
+router.route("/logout").get(userController_1.getLogout);
+router.route("/protected").get(userController_1.requireAuth, userController_1.getProtected);
 router
     .route("/")
     .get(userController_1.getAllUsers)

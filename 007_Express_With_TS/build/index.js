@@ -42,7 +42,16 @@ app.use(function (req, res, next) {
 });
 // ROUTES
 app.get("/", function (req, res, next) {
-    res.send("\n        <div>Hello, Node.js!</div>\n    ");
+    var url = req.protocol + "://" + req.get("host") + req.originalUrl;
+    if (req.session && req.session.loggedIn === true) {
+        var _a = req.session, name_1 = _a.name, email = _a.email;
+        res.send("\n        <div style=\"max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh\">\n            <div style=\"font-size: 25px; margin-bottom: 10px\">Logged In successfuly!</div>\n            <div style=\"font-size: 20px\">Name: " + name_1 + "</div>    \n            <div style=\"font-size: 20px\">Email: " + email + "</div>\n            <a href=\"" + (url +
+            "users/logout") + "\" style=\"font-size: 20px; text-decoration: none; color: #333\">Log Out</a>\n        </div>\n    ");
+    }
+    else {
+        res.send("\n        <div style=\"max-width: 1070px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh\">\n            <div style=\"font-size: 25px\">You have to log in to view this route!</div>\n            <a href=\"" + (url +
+            "users/login") + "\" style=\"font-size: 20px; text-decoration: none; color: #333\">Log In</a>\n        </div>\n      ");
+    }
 });
 app.use("/users", userRouter);
 // uncaught exceptions
