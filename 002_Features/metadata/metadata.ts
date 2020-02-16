@@ -22,6 +22,7 @@ const truth = Reflect.getMetadata("desc", user, "age");
 console.log(user, secrets, truth);
 
 // METADATA IMPLEMENTATION ON JS CLASSES
+
 @printMetadata
 class Human {
   constructor(

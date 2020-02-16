@@ -8,6 +8,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var cookie_session_1 = __importDefault(require("cookie-session"));
+// temp
+// import "./controllers/userController";
+var routes_1 = require("./decorators/routes");
 var dotenv = require("dotenv");
 var morgan = require("morgan");
 var cookieParser = require("cookie-parser");
@@ -54,6 +57,7 @@ app.get("/", function (req, res, next) {
     }
 });
 app.use("/users", userRouter);
+app.use(routes_1.AppRouter.getInstance());
 // uncaught exceptions
 process.on("uncaughtException", function (err) {
     console.log("UNCAUGHT EXCEPTION", err.name, err.message);

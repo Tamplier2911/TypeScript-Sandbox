@@ -1,5 +1,27 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestWithBody } from "../types/interfaces";
+import { Get, Controller } from "../decorators/routes";
+// import { get } from "http";
+
+@Controller("/test")
+class userController {
+  @Get("/login")
+  getLogin(req: Request, res: Response, next: NextFunction): void {
+    res.send(`
+      <div style="max-width: 1070px; margin: 0 auto">
+        <form method="POST" style="display: flex; flex-direction: column">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" style="margin-bottom: 1rem; padding: .5rem .1rem;"/>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" style="margin-bottom: 1rem; padding: .5rem .1rem;"/>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" style="margin-bottom: 1rem; padding: .5rem .1rem;"/>
+            <button type="submit" style="margin-bottom: 1rem; padding: .5rem .1rem;">Submit</button>
+        <form>
+      </div> 
+    `);
+  }
+}
 
 export const requireAuth = (
   req: Request,

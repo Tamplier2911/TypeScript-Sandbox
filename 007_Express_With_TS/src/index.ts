@@ -4,6 +4,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 
+// temp
+// import "./controllers/userController";
+import { AppRouter } from "./decorators/routes";
+
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -75,6 +79,8 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/users", userRouter);
+
+app.use(AppRouter.getInstance());
 
 // uncaught exceptions
 process.on("uncaughtException", err => {
