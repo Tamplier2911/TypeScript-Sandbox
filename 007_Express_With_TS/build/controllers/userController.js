@@ -11,14 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var routes_1 = require("../decorators/routes");
 // import { get } from "http";
+exports.testMiddleware = function (req, res, next) {
+    console.log("Middleware Reached!");
+    next();
+};
 var userController = /** @class */ (function () {
     function userController() {
     }
+    // @Validate(["test"])
     userController.prototype.getLogin = function (req, res, next) {
         res.send("\n      <div style=\"max-width: 1070px; margin: 0 auto\">\n        <form method=\"POST\" style=\"display: flex; flex-direction: column\">\n            <label for=\"name\">Name:</label>\n            <input type=\"text\" id=\"name\" name=\"name\" style=\"margin-bottom: 1rem; padding: .5rem .1rem;\"/>\n            <label for=\"email\">Email:</label>\n            <input type=\"email\" id=\"email\" name=\"email\" style=\"margin-bottom: 1rem; padding: .5rem .1rem;\"/>\n            <label for=\"password\">Password:</label>\n            <input type=\"password\" id=\"password\" name=\"password\" style=\"margin-bottom: 1rem; padding: .5rem .1rem;\"/>\n            <button type=\"submit\" style=\"margin-bottom: 1rem; padding: .5rem .1rem;\">Submit</button>\n        <form>\n      </div> \n    ");
     };
     __decorate([
         routes_1.Get("/login"),
+        routes_1.Use(exports.testMiddleware),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object, Function]),
         __metadata("design:returntype", void 0)

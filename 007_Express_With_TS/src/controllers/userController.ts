@@ -1,11 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestWithBody } from "../types/interfaces";
-import { Get, Controller } from "../decorators/routes";
+import { Get, Controller, Use, Validate } from "../decorators/routes";
 // import { get } from "http";
+
+export const testMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("Middleware Reached!");
+  next();
+};
 
 @Controller("/test")
 class userController {
   @Get("/login")
+  @Use(testMiddleware)
+  // @Validate(["test"])
   getLogin(req: Request, res: Response, next: NextFunction): void {
     res.send(`
       <div style="max-width: 1070px; margin: 0 auto">
