@@ -1,3 +1,4 @@
+/*
 import express from "express";
 
 const router = express.Router();
@@ -17,9 +18,9 @@ import {
 } from "../controllers/userController";
 
 router
-  .route("/login")
-  .get(getLogin)
-  .post(postLogin);
+.route("/login")
+.get(getLogin)
+.post(postLogin);
 
 router.route("/logout").get(getLogout);
 
@@ -37,3 +38,5 @@ router
   .delete(deleteOneUser);
 
 module.exports = router;
+
+*/

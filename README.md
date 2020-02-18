@@ -10,3 +10,4 @@ Including this file in order to keep references.
 5. 005 - Code reusability in TS.
 6. 006 - Framework Architecture with TS.
 7. 007 - Express and TS integration.
+8. 008 - React and TS integration.

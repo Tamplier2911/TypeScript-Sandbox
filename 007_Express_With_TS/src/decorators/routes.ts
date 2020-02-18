@@ -3,6 +3,7 @@ import express, { RequestHandler } from "express";
 import { MethodEnums } from "../enums/methodEnums";
 import { MetadataKeysEnums } from "../enums/metadataKeysEnums";
 import { NextFunction, Response, Request } from "express";
+import { RouteHandlerDescriptor } from "../types/interfaces";
 
 export class AppRouter {
   private static instance: express.Router;
@@ -93,7 +94,7 @@ export function Controller(routePrefix: string) {
 // Route Binder | Method Decorator
 function RouteBinder(method: string) {
   return function(path: string) {
-    return function(target: any, key: string, desc: PropertyDescriptor) {
+    return function(target: any, key: string, desc: RouteHandlerDescriptor) {
       // add path field, with $path value
       // on targets - prototype of key, key - exact method that gets metadata
       Reflect.defineMetadata(MetadataKeysEnums.path, path, target, key);
