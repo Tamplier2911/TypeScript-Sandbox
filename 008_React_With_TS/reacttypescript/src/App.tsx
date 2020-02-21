@@ -1,17 +1,20 @@
-import React, { Component } from "react";
 import "./App.css";
+import React, { Component } from "react";
+
+import connect from "react-redux";
+import { fetchTasksAsync } from "./redux/tasks/task.actions";
 
 interface AppProps {
   color?: string;
 }
 
-const App = (props: AppProps) => {
-  console.log(props);
+const App = (props: AppProps): any => {
+  // console.log(props);
   return (
     <div className="container">
       <h1>Hello TSX</h1>
       <p>App Component color is: {props.color}</p>
-      <ClassApp color="blue" />
+      <ClassApp />
     </div>
   );
 };
@@ -48,7 +51,7 @@ class ClassApp extends Component<AppProps, CLassAppState> {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <div>Class component color is: {this.props.color}</div>
@@ -74,4 +77,9 @@ class ClassApp extends Component<AppProps, CLassAppState> {
   }
 }
 
+// const mapStateToProps = state => ({
+//   tasks: state.tasks
+// });
+
+// export default connect(mapStateToProps, { fetchTasksAsync })(App);
 export default App;
