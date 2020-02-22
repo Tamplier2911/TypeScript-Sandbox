@@ -42,6 +42,16 @@ export interface FetchTasksFailureAction {
   payload: string;
 }
 
+export interface DeleteTaskAction {
+  type: TaskType.DELETE_TASK;
+  payload: number;
+}
+
+export const deleteTask = (id: number): DeleteTaskAction => ({
+  type: TaskType.DELETE_TASK,
+  payload: id
+});
+
 export const fetchTasksStart = (): FetchTasksStartAction => ({
   type: TaskType.FETCH_TASKS_START
 });

@@ -37,6 +37,7 @@ h1 {
   display: flex;
   align-items: center;
   /* justify-content: center; */
+  margin-bottom: 2rem;
 }
 
 @media only screen and (max-width: 540px) {
@@ -55,4 +56,43 @@ h1 {
   display: flex;
   flex: 1;
   justify-content: center;
+}
+
+.tasks-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-box__button {
+  flex: 1;
+  padding: 0.5rem 2rem;
+}
+
+.tasks-box__tasks {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0rem;
+}
+
+.tasks-box__task {
+  border: 0.1rem solid rgb(156, 156, 156);
+  padding: 1rem;
+  margin: 0.5rem 0rem;
+  font-size: 2rem;
+
+  display: flex;
+}
+
+.tasks-box__task--cnt {
+  margin-right: auto;
+}
+
+.tasks-box__task--btn {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.tasks-box__task--btnd {
+  padding: 0.5rem 2rem;
 }
