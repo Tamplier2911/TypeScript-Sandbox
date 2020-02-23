@@ -8,19 +8,17 @@ import { StoreState } from "./redux/root.reducer";
 interface AppProps {
   // tasks?: { allTasks: Task[]; errorMessage: string; isLoading: boolean };
   tasks?: { allTasks: Task[]; errorMessage: string; isLoading: boolean };
-  fetchTasksAsync?: any;
-  deleteTask?: any;
+  fetchTasksAsync?: Function;
+  deleteTask?: Function;
 }
 
-const App = (props: AppProps): any => {
+const App = (props: AppProps) => {
   const { tasks, fetchTasksAsync, deleteTask } = props;
   useEffect(() => {
     fetchTasksAsync();
   }, [fetchTasksAsync]);
   const n = 8;
-  if (tasks) {
-    console.log(tasks.isLoading);
-  }
+
   return (
     <div className="container">
       <h1>Hello TSX</h1>
@@ -28,34 +26,43 @@ const App = (props: AppProps): any => {
         <button
           type="button"
           className="tasks-box__button"
-          onClick={fetchTasksAsync}
+          onClick={() => fetchTasksAsync()}
         >
           Fetch Tasks
         </button>
-        <div className="tasks-box__tasks">
-          {tasks?.allTasks.map((task, i) => {
-            const { id, title, completed } = task;
-            if (i < n) {
-              return (
-                <div className="tasks-box__task" key={id}>
-                  <div className="tasks-box__task--cnt">
-                    <div>Task: {title[0].toUpperCase() + title.slice(1)}.</div>
-                    <div>Completed: {completed ? `Yes` : "No"}</div>
+
+        {tasks && tasks.isLoading ? (
+          <div className="tasks-box__loading">
+            <div className="tasks-box__spinner"></div>
+          </div>
+        ) : (
+          <div className="tasks-box__tasks">
+            {tasks?.allTasks.map((task, i) => {
+              const { id, title, completed } = task;
+              if (i < n) {
+                return (
+                  <div className="tasks-box__task" key={id}>
+                    <div className="tasks-box__task--cnt">
+                      <div>
+                        Task: {title[0].toUpperCase() + title.slice(1)}.
+                      </div>
+                      <div>Completed: {completed ? `Yes` : "No"}</div>
+                    </div>
+                    <div className="tasks-box__task--btn">
+                      <button
+                        type="button"
+                        className="tasks-box__task--btnd"
+                        onClick={() => deleteTask(id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                  <div className="tasks-box__task--btn">
-                    <button
-                      type="button"
-                      className="tasks-box__task--btnd"
-                      onClick={() => deleteTask(id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
+                );
+              }
+            })}
+          </div>
+        )}
       </div>
       <ClassApp />
     </div>

@@ -96,3 +96,33 @@ h1 {
 .tasks-box__task--btnd {
   padding: 0.5rem 2rem;
 }
+
+.tasks-box__loading {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0rem;
+  min-height: 85vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasks-box__spinner {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  animation: spinner 1s infinite;
+  /* border: 0.2rem solid transparent; */
+  border-right: 0.2rem solid transparent;
+  border-top: 0.2rem solid #333;
+  border-bottom: 0.2rem solid #333;
+  border-left: 0.2rem solid transparent;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
